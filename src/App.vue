@@ -1,6 +1,18 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import myLogo from './assets/my_logo.png'
+
+
+const documents = [
+  { label: 'Resume / CV', file: 'my_resume_1.pdf' },
+  { label: 'Certificates_From_Philanthropy_University', file: 'Francis__Murungi_Philanthropy_University.pdf' }
+]
+
+const selectedDoc = ref(documents[0])
+
+const currentDocUrl = computed(() => {
+  return `${import.meta.env.BASE_URL}${selectedDoc.value.file}`
+})
 
 const activeFilter = ref('All')
 
@@ -66,13 +78,13 @@ const filteredProjects = () => {
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-image">
-          <img :src="profileImg" alt="Francis Murungi" class="profile-pic" />
+          <img :src="myLogo" alt="Remotely_worker" class="my_logo" />
         </div>
         <div class="hero-text">
           <p class="badge">Entebbe, Uganda • Open to Opportunities</p>
           <h1>Hi, I'm <span class="highlight">Francis Murungi</span></h1>
           <p class="subtitle">
-            Front Desk &amp; Operations Specialist with <strong>10+ years</strong> of hospitality
+            Front Desk &amp; Operations Specialist with <strong>years</strong> of hospitality
             experience, paired with <strong>Full-Stack Web Development</strong> (Python/Django,
             Vue.js) and <strong>CorelDraw</strong> graphic design.
           </p>
@@ -80,6 +92,40 @@ const filteredProjects = () => {
             <a href="#projects" class="btn-primary">View My Work</a>
             <a href="#contact" class="btn-secondary">Get in Touch</a>
           </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="document" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Documents &amp; Portfolio PDFs</h2>
+          <div class="doc-controls">
+            <button
+              v-for="doc in documents"
+              :key="doc.file"
+              :class="['filter-btn', { active: selectedDoc.file === doc.file }]"
+              @click="selectedDoc = doc"
+            >
+              {{ doc.label }}
+            </button>
+            <a :href="currentDocUrl" target="_blank" rel="noopener" download class="btn-small">
+              Download ↓
+            </a>
+          </div>
+        </div>
+
+        <div class="pdf-wrapper">
+          <iframe
+            :key="currentDocUrl"
+            :src="currentDocUrl"
+            :title="selectedDoc.label"
+            class="pdf-frame"
+          ></iframe>
+          <p class="pdf-fallback">
+            Trouble viewing on mobile?
+            <a :href="currentDocUrl" target="_blank" rel="noopener">Open {{ selectedDoc.label }} in a new tab →</a>
+          </p>
         </div>
       </div>
     </section>
@@ -236,8 +282,7 @@ html {
   text-decoration: none; 
 }
 .logo span, .highlight, .date, .category-tag, .card-link { 
-  color: var(--accent);
-  font-size :2.09rem; 
+  color: var(--accent); 
 }
 .nav-links { 
   display: flex; 
@@ -409,6 +454,43 @@ html {
   box-shadow: 0 12px 30px rgba(56, 189, 248, 0.18);
   display: block;
 }
+
+.doc-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pdf-wrapper {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+}
+
+.pdf-frame {
+  width: 100%;
+  height: 750px;
+  border: none;
+  display: block;
+}
+
+.pdf-fallback {
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.pdf-fallback a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
 @media (max-width: 720px) {
   .hero-grid {
     flex-direction: column;
@@ -433,6 +515,9 @@ html {
 
   .hero-actions {
     justify-content: center;
+  }
+  .pdf-frame {
+    height: 480px;
   }
 }
 </style>
