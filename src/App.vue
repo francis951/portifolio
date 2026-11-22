@@ -66,13 +66,13 @@ const filteredProjects = () => {
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-image">
-          <img :src="myLogo" alt="tech-guru" class="my_logo" />
+          <img :src="profileImg" alt="Francis Murungi" class="profile-pic" />
         </div>
         <div class="hero-text">
           <p class="badge">Entebbe, Uganda • Open to Opportunities</p>
           <h1>Hi, I'm <span class="highlight">Francis Murungi</span></h1>
           <p class="subtitle">
-            Front Desk &amp; Operations Specialist with <strong>years</strong> of hospitality
+            Front Desk &amp; Operations Specialist with <strong>10+ years</strong> of hospitality
             experience, paired with <strong>Full-Stack Web Development</strong> (Python/Django,
             Vue.js) and <strong>CorelDraw</strong> graphic design.
           </p>
@@ -265,7 +265,7 @@ html {
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
-  gap: 3.9rem;
+  gap: 2.5rem;
 }
 .hero-image {
   flex-shrink: 0;
@@ -401,8 +401,8 @@ html {
   font-size: 0.85rem;
 }
 .my_logo {
-  width: 450px;
-  height: 360px;
+  width: 220px;
+  height: 220px;
   border-radius: 16px;
   object-fit: cover;
   border: 3px solid var(--accent);
@@ -411,13 +411,26 @@ html {
 }
 @media (max-width: 720px) {
   .hero-grid {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
   }
+
+  .hero-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-pic {
+    width: 180px;
+    height: 180px;
+  }
+
   .hero-text {
     text-align: center;
   }
+
   .hero-actions {
     justify-content: center;
   }
