@@ -5,6 +5,8 @@ import myLogo from './assets/my_logo.png'
 
 const documents = [
   { label: 'Resume / CV', file: 'my_resume_1.pdf' },
+  { label: 'Brochure', file: 'brochure_temp.pdf' },
+  { label: 'Flyer', file: 'corp-flyer.pdf' },
   { label: 'Certificates_From_Philanthropy_University', file: 'Francis__Murungi_Philanthropy_University.pdf' }
 ]
 
@@ -77,9 +79,6 @@ const filteredProjects = () => {
 
     <section class="hero">
       <div class="container hero-grid">
-        <div class="hero-image">
-          <img :src="myLogo" alt="Remotely_worker" class="my_logo" />
-        </div>
         <div class="hero-text">
           <p class="badge">Entebbe, Uganda • Open to Opportunities</p>
           <h1>Hi, I'm <span class="highlight">Francis Murungi</span></h1>
@@ -298,7 +297,18 @@ html {
   color: var(--text);
 }
 .hero { 
-  padding: 4.5rem 0 3.5rem; 
+  padding: 4.5rem 0 3.5rem;
+  min-height: 115vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url('./assets/my_logo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
 }
 .badge {
   display: inline-block; padding: 0.35rem 0.85rem; border-radius: 999px;
@@ -318,7 +328,11 @@ html {
 .hero-text {
   text-align: left;
 }
-.hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); margin-bottom: 1rem; }
+.hero h1 { 
+  font-size: clamp(2rem, 5vw, 3.25rem); 
+  margin-bottom: 1rem;
+  color: var(--muted); 
+}
 .subtitle {  
   margin: 0 0 1.75rem;
   color: var(--muted);
@@ -331,26 +345,31 @@ html {
   flex-wrap: wrap; 
 }
 .btn-primary, .btn-secondary, .btn-small {
-  display: inline-block; padding: 0.7rem 1.4rem; border-radius: 8px;
-  font-weight: 600; text-decoration: none;
+  display: inline-block; 
+  padding: 0.7rem 1.4rem; 
+  border-radius: 8px;
+  font-weight: 600; 
+  text-decoration: none;
 }
 .btn-small { 
   padding: 0.4rem 0.9rem; 
-  background: var(--accent); color: #0f172a !important; 
+  background: var(--accent); 
+  color: #0f172a !important; 
 }
 .btn-primary { 
   background: var(--accent); 
-  color: #0f172a; 
+  color: var(--card); 
 }
 .btn-secondary { 
-  border: 1px solid var(--border); 
-  color: var(--text); 
+  border: 1px solid var(--muted); 
+  color: var(--card);
+  background: var(--accent);
 }
 .section { 
   padding: 4rem 0; 
 }
 .alt-bg { 
-  background: rgba(30, 41, 59, 0.45); 
+  background: rgba(24, 35, 53, 0.45); 
 }
 .section-title { 
   font-size: 1.75rem; 
@@ -404,7 +423,7 @@ html {
   border-radius: 8px; cursor: pointer; font-size: 0.85rem;
 }
 .filter-btn.active { 
-  background: var(--accent); color: #0f172a; 
+  background: var(--accent); color: #49587c; 
   border-color: var(--accent); 
   font-weight: 600; 
 }
@@ -444,15 +463,6 @@ html {
   padding: 2rem 0; border-top: 1px solid var(--border);
   color: var(--muted); 
   font-size: 0.85rem;
-}
-.my_logo {
-  width: 220px;
-  height: 220px;
-  border-radius: 16px;
-  object-fit: cover;
-  border: 3px solid var(--accent);
-  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.18);
-  display: block;
 }
 
 .doc-controls {
@@ -496,12 +506,6 @@ html {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
-  }
-
-  .hero-image {
-    width: 100%;
-    display: flex;
-    justify-content: center;
   }
 
   .profile-pic {
